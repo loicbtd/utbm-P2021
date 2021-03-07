@@ -1,16 +1,17 @@
 SOURCE_DIRECTORY=src
 OUT_DIRECTORY=dist
-VERSION=1.0.0
+PROGRAM_NAME=program
+VERSION=0.1.0
 
 COMPILER=gcc
-COMPILATION_FLAGS=-W -I -Wall -pedantic
+COMPILATION_FLAGS=-W -I -Wall -Wextra -pedantic
 LINKING_FLAFS=
 SOURCE_FILES=$(shell find . -name "*.c")
 OBJECT_FILES=$(SOURCE_FILES:.c=.o)
 
-all: program-$(VERSION) clean
+all: $(PROGRAM_NAME)-v$(VERSION) clean
 
-program-$(VERSION): $(OBJECT_FILES)
+$(PROGRAM_NAME)-v$(VERSION): $(OBJECT_FILES)
 	mkdir -p $(OUT_DIRECTORY)
 	$(COMPILER) -o $(OUT_DIRECTORY)/$@ $^ $(LINKING_FLAFS)
 

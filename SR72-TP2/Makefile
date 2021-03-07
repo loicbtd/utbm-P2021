@@ -1,23 +1,26 @@
 SOURCE_DIRECTORY=src
 OUT_DIRECTORY=dist
-VERSION=1.0.0
+PROGRAM_NAME=program
+VERSION=0.1.0
 
 COMPILER=gcc
 COMPILATION_FLAGS=-W -I -Wall -pedantic
-LINKING_FLAFS=
+LINKING_FLAGS=
 SOURCE_FILES=$(shell find . -name "*.c")
 OBJECT_FILES=$(SOURCE_FILES:.c=.o)
 
-all: program-$(VERSION) clean
+all: $(PROGRAM_NAME)-v$(VERSION) clean
 
-program-$(VERSION): $(OBJECT_FILES)
-	mkdir -p $(OUT_DIRECTORY)
-	$(COMPILER) -o $(OUT_DIRECTORY)/$@ $^ $(LINKING_FLAFS)
+$(PROGRAM_NAME)-v$(VERSION): $(OBJECT_FILES)
+	@mkdir -p $(OUT_DIRECTORY)
+	@echo "NOTICE: compile"
+	@$(COMPILER) -o $(OUT_DIRECTORY)/$@ $^ $(LINKING_FLAGS)
 
 %.o: %.c
-	$(COMPILER) -o $@ -c $< $(COMPILATION_FLAGS)
+	@$(COMPILER) -o $@ -c $< $(COMPILATION_FLAGS)
 
 .PHONY: clean
 
 clean:
-	rm $(OBJECT_FILES)
+	@echo "NOTICE: clean"
+	@rm -f $(OBJECT_FILES)
